@@ -34,7 +34,7 @@ export default function reducer (users = [], action) {
       return users.map(user => (
         action.user.id === user.id ? action.user : user
       ));
-
+    
     default:
       return users;
   }

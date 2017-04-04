@@ -44,12 +44,33 @@ app.post('/login', function(req, res, next){
     if (!foundUser) res.sendStatus(401)
     else {
       req.session.user = foundUser
-      res.sendStatus(200)
+      res.send(foundUser)
       //res.redirect('/home')
     }
   })
   .catch(next)
 })
+
+app.post('/signup', function(req, res, next){
+  User.create(req.body)
+  .then((createdUser) => {
+    if (!createdUser) res.sendStatus(401)
+    else {
+      req.session.user = createdUser
+      res.send(createdUser)
+      //res.redirect('/home')
+    }
+  })
+  .catch(next)
+})
+
+app.post('/logout', function(req, res, next){
+  req.session.destroy(() => {
+    console.log('Session destroyed.');
+    res.redirect('/');
+  })
+})
+
 app.use(require('./statics.middleware'));
 
 app.use(require('./error.middleware'));

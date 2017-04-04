@@ -38,7 +38,9 @@ class UserItem extends React.Component {
           <div className="media-right media-middle">
             <button
                 className="btn btn-default"
-                onClick={this.removeUserCallback}>
+                onClick={this.removeUserCallback}
+                disabled={!this.props.login.isAdmin}
+            >
               <span className="glyphicon glyphicon-remove" />
             </button>
           </div>
@@ -56,7 +58,7 @@ class UserItem extends React.Component {
 
 /* -----------------    CONTAINER     ------------------ */
 
-const mapState = ({ stories }) => ({ stories });
+const mapState = ({ stories, login }) => ({ stories, login });
 
 const mapDispatch = { removeUser, removeStory };
 
